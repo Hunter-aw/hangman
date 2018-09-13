@@ -14,6 +14,9 @@ class Letters extends Component {
                 selectLetter = {this.props.selectLetter} />)
         })
     }
+    updateScore() {
+        
+    }
     render() {
         return (
             <div>

@@ -11,7 +11,8 @@ class App extends Component {
     super()
     this.state = {
       letterStatus: this.generateLetterStatus(),
-      score: 100
+      score: 100,
+      word: "HUNTER"
     }
   }
 
@@ -31,20 +32,29 @@ class App extends Component {
     this.setState({ letterStatus: letterStatus})
   }
 
-  decreaseScore = () => {
+  updateScore = (letter) => {
     let newScore = this.state.score
-    newScore -= 10
-    this.setState ({score: newScore})
+    if (this.state.word.indexOf(letter) >-1){
+      newScore += 5
+    } else {
+      newScore -= 20
+    }
+      this.setState ({score: newScore})
+  }
+
+  selectAndUpdateLetter = (letter) => {
+    this.selectLetter(letter)
+    this.updateScore(letter)
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.decreaseScore}>Decrease Score</button>
         <div className="letters">
-        <Letters letterStatus = {this.state.letterStatus} selectLetter = {this.selectLetter}/>
+          <Letters letterStatus = {this.state.letterStatus} 
+            selectLetter = {this.selectAndUpdateLetter}/>
         </div>
-        <div><Solution letterStatus = {this.state.letterStatus}/></div>
+        <div><Solution letterStatus = {this.state.letterStatus} word = {this.state.word}/></div>
         <div> Your Score is: <Score score={this.state.score}/> </div>
       </div>
     );

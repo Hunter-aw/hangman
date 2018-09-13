@@ -1,6 +1,10 @@
 import React from 'react';
 
 
-const score = (props) => <div>{props.score}</div>
-
+class score extends React.Component{
+  
+    render() {
+    return (<div>{this.props.score}</div>)
+    }
+}
 export default score
