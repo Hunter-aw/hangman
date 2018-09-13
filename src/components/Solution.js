@@ -15,7 +15,8 @@ class Solution extends Component {
             return <Letter 
             letter ={this.props.letterStatus[w] ? w : "_ "} 
             key ={w}
-            status = {"solutionLetter"} 
+            status = {"solutionLetter"}
+            selectLetter = {this.props.selectLetter} 
             />
         })
     }

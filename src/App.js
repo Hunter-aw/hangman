@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       letterStatus: this.generateLetterStatus(),
       score: 100,
-      word: "HUNTER"
+      word: "HUNTER",
+      addedScore: 0
     }
   }
 
@@ -23,6 +24,7 @@ class App extends Component {
         letterStatus[String.fromCharCode(i)] = false
         i++
     }
+    console.log(letterStatus)
     return letterStatus
   }
   
@@ -34,12 +36,14 @@ class App extends Component {
 
   updateScore = (letter) => {
     let newScore = this.state.score
+    let newAddedScore = this.state.addedScore
     if (this.state.word.indexOf(letter) >-1){
       newScore += 5
+      newAddedScore += 1
     } else {
       newScore -= 20
     }
-      this.setState ({score: newScore})
+      this.setState ({score: newScore, addedScore: newAddedScore})
   }
 
   selectAndUpdateLetter = (letter) => {
@@ -48,17 +52,31 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="letters">
-          <Letters letterStatus = {this.state.letterStatus} 
-            selectLetter = {this.selectAndUpdateLetter}/>
+    if (this.state.score <= 0) {
+      return (
+        <div>
+          <div className = "gameOver">YOU LOSE GAME OVER</div>
         </div>
-        <div><Solution letterStatus = {this.state.letterStatus} word = {this.state.word}/></div>
-        <div> Your Score is: <Score score={this.state.score}/> </div>
-      </div>
-    );
-  }
+      )
+    }
+    else if (this.state.addedScore === this.state.word.length) {
+      return (
+        <div>
+          <div className = "youWin">YOU WIN HIGH FIVE</div>
+        </div>
+      )
+    } 
+    else {  return (
+        <div>
+          <div className="letters">
+            <Letters letterStatus = {this.state.letterStatus} 
+              selectLetter = {this.selectAndUpdateLetter}/>
+          </div>
+          <div><Solution letterStatus = {this.state.letterStatus} selectLetter = {this.selectLetter} word = {this.state.word}/></div>
+          <div> Your Score is: <Score score={this.state.score}/> </div>
+        </div>
+      );
+  }}
 }
 
 export default App;
