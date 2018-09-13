@@ -3,9 +3,17 @@ import './App.css';
 import Letters from './components/Letters'
 import Score from './components/Score'
 import Solution from './components/Solution'
+import NewGame from './components/NewGame'
 
 
-
+const newWordHints = [
+  {word: "CARROT", hint: "orange vegtable"},
+  {word: "BARK", hint: "what do dogs yell at trees?"},
+  {word: "REACT", hint: "I'm so shocked, I don't know how to..."},
+  {word: "WEWORK", hint: "Where elevation is, and what we do here"},
+  {word: "HARRYPOTTER", hint: "a shaggy plant putter"}
+]
+let gameLevel = -1 
 class App extends Component {
   constructor() {
     super()
@@ -13,6 +21,7 @@ class App extends Component {
       letterStatus: this.generateLetterStatus(),
       score: 100,
       word: "HUNTER",
+      hint: "Not a gatherer, but a...",
       addedScore: 0
     }
   }
@@ -39,7 +48,7 @@ class App extends Component {
     let newAddedScore = this.state.addedScore
     if (this.state.word.indexOf(letter) >-1){
       newScore += 5
-      newAddedScore += 1
+      newAddedScore += this.state.word.split(letter).length-1
     } else {
       newScore -= 20
     }
@@ -51,11 +60,21 @@ class App extends Component {
     this.updateScore(letter)
   }
 
+  startNewGame = () => {
+    let letterStatus = this.generateLetterStatus()
+    if (gameLevel < newWordHints.length)
+    {gameLevel += 1}
+    else {gameLevel = 1}
+
+    this.setState({letterStatus: letterStatus, score: 100, word: newWordHints[gameLevel].word, hint: newWordHints[gameLevel].hint, addedScore: 0})
+  }
+
   render() {
     if (this.state.score <= 0) {
       return (
         <div>
           <div className = "gameOver">YOU LOSE GAME OVER</div>
+          <NewGame newGame = {this.startNewGame}/>
         </div>
       )
     }
@@ -63,6 +82,7 @@ class App extends Component {
       return (
         <div>
           <div className = "youWin">YOU WIN HIGH FIVE</div>
+          <NewGame newGame = {this.startNewGame}/>
         </div>
       )
     } 
@@ -72,7 +92,10 @@ class App extends Component {
             <Letters letterStatus = {this.state.letterStatus} 
               selectLetter = {this.selectAndUpdateLetter}/>
           </div>
-          <div><Solution letterStatus = {this.state.letterStatus} selectLetter = {this.selectLetter} word = {this.state.word}/></div>
+          <div><Solution letterStatus = {this.state.letterStatus} 
+                        selectLetter = {this.selectLetter} 
+                        word = {this.state.word} 
+                        hint = {this.state.hint}/></div>
           <div> Your Score is: <Score score={this.state.score}/> </div>
         </div>
       );
