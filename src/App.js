@@ -25,20 +25,16 @@ class App extends Component {
     return letterStatus
   }
   
-  deleteLetter = () => {
+  selectLetter = (letter) => {
     let letterStatus = this.state.letterStatus
-    const letters = Object.keys(letterStatus)
-    let firstLetter = letters[0]
-
-    delete letterStatus[firstLetter]
+    letterStatus[letter] = true
     this.setState({ letterStatus: letterStatus})
-    console.log("party")
   }
+
   decreaseScore = () => {
     let newScore = this.state.score
     newScore -= 10
     this.setState ({score: newScore})
-    console.log('u workin')
   }
 
   render() {
@@ -46,7 +42,7 @@ class App extends Component {
       <div>
         <button onClick={this.decreaseScore}>Decrease Score</button>
         <div className="letters">
-        <Letters letterStatus = {this.state.letterStatus} deleteLetter = {this.deleteLetter}/>
+        <Letters letterStatus = {this.state.letterStatus} selectLetter = {this.selectLetter}/>
         </div>
         <div><Solution letterStatus = {this.state.letterStatus}/></div>
         <div> Your Score is: <Score score={this.state.score}/> </div>

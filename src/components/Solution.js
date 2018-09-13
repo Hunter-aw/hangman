@@ -23,8 +23,8 @@ class Solution extends Component {
     render() {
         return (
             <div>
+                <div className = "hint">{this.state.hint}</div>
                 <span>{this.generateWordLetters(this.state.word)}</span>
-                <div>{this.state.hint}</div>
             </div>
         )
     }

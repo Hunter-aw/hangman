@@ -11,7 +11,7 @@ class Letters extends Component {
                 letter={l} 
                 key={l} 
                 status={letterStatus[l] ? "selected" : null}
-                deleteLetter = {this.props.deleteLetter} />)
+                selectLetter = {this.props.selectLetter} />)
         })
     }
     render() {
