@@ -27,9 +27,9 @@ class App extends Component {
   }
   
   selectLetter = (letter) => {
-    let letterStatus = this.state.letterStatus
+    let letterStatus = {...this.state.letterStatus}
     letterStatus[letter] = true
-    this.setState({ letterStatus: letterStatus})
+    this.setState({letterStatus: letterStatus})
   }
 
   updateScore = (letter) => {

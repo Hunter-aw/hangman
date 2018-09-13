@@ -37,6 +37,18 @@
 .hint {
   text-emphasis-style: open 
 }
+.highScore {
+  color: Green;
+}
+.medScore {
+  color: darkgoldenrod;
+}
+.lowScore {
+  color:red
+}
+.score {
+  font-size: 20px
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
