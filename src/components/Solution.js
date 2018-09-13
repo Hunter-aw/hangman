@@ -10,9 +10,13 @@ class Solution extends Component {
         }
     }
 
-    generateWordLetters(word) {
-        return word.split("").map(w => {
-            return <Letter letter ={w} key ={w} />
+    generateWordLetters() {
+        return this.state.word.split("").map(w => {
+            return <Letter 
+            letter ={this.props.letterStatus[w] ? w : "_ "} 
+            key ={w}
+            status = {"solutionLetter"} 
+            />
         })
     }
 

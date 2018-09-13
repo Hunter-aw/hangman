@@ -4,17 +4,21 @@ import Letter from './Letter'
 
 class Letters extends Component {
 
-    genreateLetterTags(letterStatus) {
+    genreateLetterTags() {
+        const letterStatus = (this.props.letterStatus)
         return Object.keys(letterStatus).map(l => {
-            return (<Letter letter={l} key={l} />)
+            return (<Letter 
+                letter={l} 
+                key={l} 
+                status={letterStatus[l] ? "selected" : null}
+                deleteLetter = {this.props.deleteLetter} />)
         })
     }
     render() {
-        let letterStatuses = (this.props.letterStatus)
         return (
             <div>
             <div>Here are yo lettas</div>
-            <span className = "letter">{this.genreateLetterTags(letterStatuses)}</span>
+            <span className = "letter">{this.genreateLetterTags()}</span>
             </div>
         )
     }

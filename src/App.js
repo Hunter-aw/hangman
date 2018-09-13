@@ -46,7 +46,7 @@ class App extends Component {
       <div>
         <button onClick={this.decreaseScore}>Decrease Score</button>
         <div className="letters">
-        <Letters letterStatus = {this.state.letterStatus}/>
+        <Letters letterStatus = {this.state.letterStatus} deleteLetter = {this.deleteLetter}/>
         </div>
         <div><Solution letterStatus = {this.state.letterStatus}/></div>
         <div> Your Score is: <Score score={this.state.score}/> </div>

@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 class Letter extends Component{
     render() {
     return (
-        <span>{this.props.letter}</span>
+        <span 
+        className={this.props.status} onClick = {this.props.deleteLetter}>{this.props.letter}</span>
     )}
 }
 
